@@ -14,7 +14,7 @@ function findLongestWord(wordArr){
         result=wordArr[i]
       }
   }
-   return result
+   return (result.length>0)? result : null
 }
 
 
@@ -23,17 +23,34 @@ function findLongestWord(wordArr){
 // Iteration #3: Calculate the sum
 
 const numbers = [6, 12, 1, 18, 13, 16, 2, 1, 8, 10];
+
 function sumNumbers(arr){
-  return arr.reduce((a, c) => a + c);
+  return (arr.length>0)? arr.reduce((a, c) =>a + c) : 0
 }
 
 
 // Iteration #4: Calculate the average
 // Level 1: Array of numbers
+
 const numbersAvg = [2, 6, 9, 10, 7, 4, 1, 9];
+
+function averageNumbers(arr){
+  return sumNumbers(arr)/arr.length || null;
+}
+
+
 
 // Level 2: Array of strings
 const wordsArr = ['seat', 'correspond', 'linen', 'motif', 'hole', 'smell', 'smart', 'chaos', 'fuel', 'palace'];
+
+function averageWordLength(arr){
+  let res=0
+  for(i=0;i<arr.length;i++){
+    res+=arr[i].length
+  }
+  return (arr.length == 0)? null : res/(arr.length) 
+} 
+
 
 // Iteration #5: Unique arrays
 const wordsUnique = [
@@ -50,10 +67,23 @@ const wordsUnique = [
   'bring'
 ];
 
+function uniquifyArray(arr){
+  //Index of shows the first index of a given element
+  //if indexOf doesn't match the current index the name isn't pushed. 
+  return (arr.length>0)? arr.filter((item,index)=>arr.indexOf(item)===index) : null
+}
+
+
 // Iteration #6: Find elements
 const wordsFind = ['machine', 'subset', 'trouble', 'starting', 'matter', 'eating', 'truth', 'disobedience'];
 
+function doesWordExist(arr,word){
+  return (arr.length>0)? arr.includes(word): null 
+}
+
+
 // Iteration #7: Count repetition
+
 const wordsCount = [
   'machine',
   'matter',
@@ -67,6 +97,12 @@ const wordsCount = [
   'disobedience',
   'matter'
 ];
+
+function howManyTimes(arr,word){
+  return arr.filter((item)=>item===word).length
+}
+
+
 
 // Iteration #8: Bonus
 
@@ -92,3 +128,29 @@ const matrix = [
   [20, 73, 35, 29, 78, 31, 90, 1, 74, 31, 49, 71, 48, 86, 81, 16, 23, 57, 5, 54],
   [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]
 ];
+
+function greatestProduct(matrix){
+  let greatest=0
+  
+  //search vertical
+  for(i=0;i<matrix.length;i++){
+    for(j=0;j<matrix[i].length;j++){
+
+      if((i-3)>=0){
+        let iRes=matrix[i][j]*matrix[i-1][j]*matrix[i-2][j]*matrix[i-3][j]
+        if(iRes > greatest){
+          greatest=iRes
+        }//end inner if
+      }//end outer if
+
+      if((j-3)>=0){
+        let jRes=matrix[i][j]*matrix[i][j-1]*matrix[i][j-2]*matrix[i][j-3]
+        if(jRes > greatest){
+          greatest=jRes
+        }//end inner if
+      }//end outer if
+
+    }//end inner loop
+ }//end outer loop
+ return greatest;
+}//end function
